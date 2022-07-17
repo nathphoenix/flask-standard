@@ -1,0 +1,129 @@
+apiVersion: v1
+#apiVersion: apps/v1
+kind: Service
+metadata:
+  name: flask-standard-service
+spec:
+  selector:
+    app: flask-standard
+  ports:
+  - protocol: "TCP"
+   # Port accessible inside cluster
+    port: 9990
+     # Port to forward to inside the pod
+    targetPort: 9900
+  type: LoadBalancer
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-standard
+spec:
+  selector:
+    matchLabels:
+      app: flask-standard
+  replicas: 4
+  template:
+    metadata:
+      labels:
+        app: flask-standard
+    spec:
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      containers:
+      - name: flask-standard
+        image: flask-standard_movie_app:latest
+        resources:
+          limits:
+            memory: 512Mi
+            cpu: "1"
+          requests:
+            memory: 256Mi
+            cpu: "0.2"
+        #securityContext:  #does not have any effect
+          #runAsUser: 0    #does not have any effect
+        imagePullPolicy: IfNotPresent
+        # volumeMounts:
+        # - name: secret-volume
+        ports:
+        - containerPort: 9900
+
+        volumeMounts:
+        - name: my-volume
+          mountPath: /app
+          readOnly: true   #does not have any effect
+      volumes:
+      - name: my-volume
+        # secret:
+        #   secretName: my-volume-secret
+        hostPath:
+          path: /mnt/vpath
+      # tolerations:
+      # - key: "dedicated-app"
+      #   operator: "Equal"
+      #   value: "my-dedi-app-a"
+      #   effect: "NoSchedule"
+
+        
+
+
+
+# apiVersion: v1
+# #apiVersion: apps/v1
+# kind: Service
+# metadata:
+#   name: flask-standard-service
+# spec:
+#   selector:
+#     app.kubernetes.io/name: flask-standard
+#   ports:
+#   - protocol: "TCP"
+#   # Port accessible inside cluster
+#     port: 9900
+#     # Port to forward to inside the pod
+#     targetPort: 9900
+#     # Port accessible outside cluster
+#     nodePort: 30000
+#   externalIPs:
+#     - 1.2.4.120
+#   type: LoadBalancer
+
+# ---
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: flask-standard
+# spec:
+#   selector:
+#     matchLabels:
+#       app: flask-standard
+#   replicas: 4
+#   template:
+#     metadata:
+#       labels:
+#         app: flask-standard
+#     spec:
+#       containers:
+#       - name: flask-standard
+#         image: flask-standard_movie_app
+#         resources:
+#           limits:
+#             memory: 512Mi
+#             cpu: "1"
+#           requests:
+#             memory: 256Mi
+#             cpu: "0.2"
+#         imagePullPolicy: Never
+#         #imagePullPolicy: IfNotPresent
+#         # volumeMounts:
+#         # - name: secret-volume
+#         ports:
+#         - containerPort: 9900
+
+#       # tolerations:
+#       # - key: "dedicated-app"
+#       #   operator: "Equal"
+#       #   value: "my-dedi-app-a"
+#       #   effect: "NoSchedule"
+

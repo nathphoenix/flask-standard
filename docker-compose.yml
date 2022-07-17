@@ -1,0 +1,66 @@
+#https://geshan.com.np/blog/2021/12/docker-postgres/
+version: "3"
+
+
+services:
+
+  db:
+    image: postgres:latest
+    container_name: movie_app_db
+    env_file:
+      - .env
+    #network_mode: bridge
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+      #- POSTGRES_HOST=db
+      - POSTGRES_HOST_AUTH_METHOD=trust
+    ports:
+      - 5531:5432
+    volumes: 
+      - db:/var/lib/postgresql/data
+      #- ./db/init.sql:/docker-entrypoint-initdb.d/create_tables.sql
+
+  movie_app:
+    build: .
+    container_name: movie_app
+    env_file:
+      - .env
+    restart: always
+    environment:
+      #- APP_NAME=FLASK APP
+      - DB_HOST=db
+      - DB_PORT=5532
+      - DB_USER=postgres
+      - DB_NAME=postgres
+      - PERSISTENCE_TYPE=postgres
+      #- DATABASE_URI=postgresql://postgres:postgres@db:5400/postgres
+    #network_mode: bridge
+    depends_on:
+      - db
+    links:
+      - db
+    volumes:
+      - movie_app:/home/node/app
+    # volumes:
+    #    - '.:/movie_app'
+    ports:
+      - 9900:9000
+  
+  nginx:
+    build: ./nginx
+    container_name: nginx-2
+    restart: always
+    ports:
+      - "8070:80"
+    depends_on:
+      - movie_app
+
+
+volumes:
+  db:
+    driver: local
+  movie_app:
+    driver: local
