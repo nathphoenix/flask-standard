@@ -1,7 +1,7 @@
 def test_home_endpoint(client):
     response = client.get('/')
     #response_body = response.get_json()
-    assert response.get_data() == b"WELCOME TO MOVIE WORLD"
+    assert response.get_data() == b"WELCOME TO OUR DOCKERIZE APP, DEPLOYED ON AWS EC2 INSTANCE"
     assert response.status_code == 200
     assert response.status_code == 200
 

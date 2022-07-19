@@ -140,7 +140,7 @@ def create_app():
 
     @app.route('/')
     def home():
-        welcome = 'WELCOME TO OUR DOCKERIZE APP, DEPLOYED ON AWS EC2 INSTANCE, '
+        welcome = 'WELCOME TO OUR DOCKERIZE APP, DEPLOYED ON AWS EC2 INSTANCE'
         return welcome, 200
 
     @app.route('/v1')
