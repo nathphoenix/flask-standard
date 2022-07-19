@@ -46,6 +46,8 @@ websockets==8.1
 Werkzeug==0.16.0
 uwsgi
 gunicorn==20.0.4
+# python-dotenv==0.10.3  original, works with docker on this system
 python-dotenv
-path==16.3.0
+# path==16.3.0 original, same as above comment
+path
 pytest
