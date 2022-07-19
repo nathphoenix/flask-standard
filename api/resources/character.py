@@ -1,4 +1,4 @@
-from importlib.resources import Resource
+# from importlib.resources import Resource
 from flask import request
 import requests
 from flask_restful import Resource
