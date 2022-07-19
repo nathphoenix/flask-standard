@@ -1,14 +1,14 @@
-language: python
-python:
-  - "3.6"      # current default Python on Travis CI
-  - "3.7"
-  - "nightly"  # nightly build
-# command to install dependencies
-install:
-  - pip install -r requirements.txt
-# command to run tests
-script:
-  - pytest
+# language: python
+# python:
+#   - "3.6"      # current default Python on Travis CI
+#   - "3.7"
+#   - "nightly"  # nightly build
+# # command to install dependencies
+# install:
+#   - pip install -r requirements.txt
+# # command to run tests
+# script:
+#   - pytest
 
 
 # sudo: required
@@ -20,3 +20,18 @@ script:
 
 # script:
 #   - docker run nathphoenix/flask-standard pytest
+
+language: python
+
+services:
+- docker
+
+install:
+- pip install -r tests/requirements.txt
+
+before_install:
+- docker-compose -f flask-standard/docker-compose.yml up --build -d
+# - docker-compose -f SQLInjection/docker-compose.yml up --build -d
+
+script:
+- pytest
