@@ -27,10 +27,10 @@ services:
 - docker
 
 install:
-- pip install -r tests/requirements.txt
+- pip install -r requirements.txt
 
 before_install:
-- docker-compose -f flask-standard/docker-compose.yml up --build -d
+- docker-compose -f docker-compose.yml up --build -d
 # - docker-compose -f SQLInjection/docker-compose.yml up --build -d
 
 script:
