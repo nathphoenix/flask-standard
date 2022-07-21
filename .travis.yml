@@ -49,8 +49,7 @@ deploy:
   on:
     branch: master
   #adding the variable name that was use to store the generated amazon credentials on travis website that is link to this repo
-  access_key_id : $AWS_ACCESS_KEY
+  access_key_id: $AWS_ACCESS_KEY
   secret_access_key:
-    secure: $AWS_SECRET_KEY
+    secure: "$AWS_SECRET_KEY"
 
-    
