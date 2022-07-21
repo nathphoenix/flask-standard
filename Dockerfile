@@ -22,7 +22,7 @@ RUN apt-get update \
 
 COPY . /movie_app/
 
-EXPOSE 9900
+EXPOSE 80
 #RUN celery -A api.functions.article_metadata.celery worker --pool=solo -l info -E
 
 #CMD [ "sh", "-c", "gunicorn app:app --bind localhost:9900" ]

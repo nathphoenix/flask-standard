@@ -47,7 +47,7 @@ services:
     # volumes:
     #    - '.:/movie_app'
     ports:
-      - 9900:9000
+      - 80:9000
   
   nginx:
     build: ./nginx
