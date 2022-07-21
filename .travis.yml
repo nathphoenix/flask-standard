@@ -38,3 +38,19 @@ before_install:
 
 script:
 - pytest
+
+deploy:
+  provider: elasticbeanstalk
+  region: 'us-east-1'
+  app: 'flask-standard'
+  env: 'Flaskstandard-env'
+  bucket_name: 'elasticbeanstalk-us-east-1-960726601836'
+  bucket_path: 'flask-standard'
+  on:
+    branch: master
+  #adding the variable name that was use to store the generated amazon credentials on travis website that is link to this repo
+  access_key_id : $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: $AWS_SECRET_KEY
+
+    
