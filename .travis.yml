@@ -45,7 +45,7 @@ deploy:
   app: 'flask-standard'
   env: 'Flaskstandard-env'
   bucket_name: 'elasticbeanstalk-us-east-1-960726601836'
-  s3_host_name: 's3-eu-west-1.amazonaws.com'
+  # s3_host_name: 's3-eu-west-1.amazonaws.com'
   bucket_path: 'flask-standard'
   on:
     branch: master
