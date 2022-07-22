@@ -44,9 +44,9 @@ after_success:
   # Log in to the docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # Take those images and push them to docker hub
-  - docker push flask-standard
-  # - docker push stephengrider/multi-nginx
-  # - docker push stephengrider/multi-server
+  - docker push movie_app
+  - docker push nginx
+  - docker push movie_app_db
   # - docker push stephengrider/multi-worker
 
 
