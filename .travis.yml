@@ -46,9 +46,9 @@ after_success:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # Take those images and push them to docker hub
   # - docker-compose build
-  - docker push nathphoenix/flask-standard_movie_app
-  - docker push nathphoenix/flask-standard_nginx
-  - docker push nathphoenix/flask-standard_movie_app
+  - docker push flask-standard_movie_app:latest
+  - docker push flask-standard_nginx:latest
+  - docker push flask-standard_movie_app:latest
   # - docker push stephengrider/multi-worker
 
 
