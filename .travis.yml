@@ -34,6 +34,7 @@ install:
 
 before_install:
 - docker-compose -f docker-compose.yml up --build -d
+- docker-compose ps
 # - docker-compose -f SQLInjection/docker-compose.yml up --build -d
 
 script:
@@ -46,7 +47,7 @@ after_success:
   # Take those images and push them to docker hub
   - docker push movie_app
   - docker push nginx
-  - docker push movie_app_db
+  # - docker push stephengrider/multi-server
   # - docker push stephengrider/multi-worker
 
 
